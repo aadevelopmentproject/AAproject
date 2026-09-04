@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AAproject — Web agency italiana</title>
+<meta name="description" content="AAproject è una web agency italiana specializzata nella progettazione e sviluppo di siti web moderni, veloci e su misura per le aziende.">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AAproject — Web agency italiana">
+<meta property="og:description" content="Progettiamo e sviluppiamo siti web moderni, veloci e su misura per le aziende.">
+<meta property="og:locale" content="it_IT">
+<style>
+/* ============================================================
+   AAproject — Design System
+   ============================================================ */
+
+/* Font ospitati in locale (nessuna richiesta a domini esterni:
+   nessun dato dell'utente viene inviato a terzi per caricare i caratteri). */
+@font-face{
+  font-family:"Inter";
+  font-style:normal;
+  font-weight:400 700;
+  font-display:swap;
+  src:url("fonts/Inter-variable-latin.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Space Grotesk";
+  font-style:normal;
+  font-weight:500 700;
+  font-display:swap;
+  src:url("fonts/SpaceGrotesk-variable-latin.woff2") format("woff2");
+}
+
+:root{
+  /* ----- colore: derivato dal logo (monogramma argento su nero) ----- */
+  --bg:#000000;
+  --bg-2:#060607;
+  --bg-3:#0D0E10;
+  --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.18);
+  --txt:#F4F5F7;
+  --dim:#9DA1A8;
+  --dim-2:#6A6E76;
+
+  --acc:#E9EBEF;          /* argento chiaro */
+  --acc-2:#FFFFFF;        /* luce */
+  --acc-3:#8B9099;        /* argento scuro */
+  --acc-soft:rgba(255,255,255,.07);
+  --grad:linear-gradient(135deg,#FFFFFF 0%,#E4E7EB 38%,#A8AEB7 72%,#7E848D 100%);
+  --grad-txt:linear-gradient(105deg,#FFFFFF 6%,#EDEFF2 42%,#B6BCC5 100%);
+
+  /* ----- forma ----- */
+  --r-sm:10px; --r:16px; --r-lg:24px; --r-xl:32px;
+  --shadow:0 24px 70px -24px rgba(0,0,0,.9);
+  --glow:0 0 0 1px rgba(255,255,255,.16), 0 18px 46px -18px rgba(255,255,255,.22);
+
+  /* ----- ritmo ----- */
+  --pad:clamp(20px,4.4vw,72px);
+  --sec:clamp(80px,11vw,150px);
+  --max:1560px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--txt);
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16.5px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+body.nav-open{overflow:hidden}
+
+img,svg{max-width:100%; display:block}
+a{color:inherit; text-decoration:none}
+button,input,textarea,select{font:inherit; color:inherit}
+
+::selection{background:rgba(255,255,255,.4); color:#fff}
+
+:focus-visible{outline:2px solid var(--acc-2); outline-offset:3px; border-radius:4px}
+
+/* ============================================================
+   Tipografia
+   ============================================================ */
+h1,h2,h3,h4{
+  font-family:"Space Grotesk","Inter",sans-serif;
+  font-weight:600;
+  line-height:1.06;
+  letter-spacing:-.03em;
+  margin:0;
+  text-wrap:balance;
+}
+h1{font-size:clamp(2.5rem,5.4vw,4.1rem)}
+h2{font-size:clamp(2rem,4.4vw,3.3rem)}
+h3{font-size:clamp(1.15rem,1.7vw,1.4rem); letter-spacing:-.02em; line-height:1.25}
+p{margin:0}
+
+.lead{font-size:clamp(1.02rem,1.55vw,1.2rem); color:var(--dim); line-height:1.65; text-wrap:pretty}
+.grad-txt{background:var(--grad-txt); -webkit-background-clip:text; background-clip:text; color:transparent}
+.accent{background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+.wrap{width:100%; max-width:var(--max); margin-inline:auto; padding-inline:var(--pad)}
+section{position:relative}
+.sec{padding-block:var(--sec)}
+.sec-head{max-width:880px; margin-bottom:clamp(44px,5vw,68px)}
+.sec-head.center{margin-inline:auto; text-align:center}
+.sec-head h2{margin-bottom:18px}
+
+.eyebrow{
+  display:inline-flex; align-items:center; gap:9px;
+  font-size:.74rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--dim); margin-bottom:20px;
+}
+.eyebrow::before{
+  content:""; width:22px; height:1px; background:var(--grad); flex:none;
+}
+.sec-head.center .eyebrow::after{content:""; width:22px; height:1px; background:var(--grad)}
+
+/* ============================================================
+   Sfondi decorativi
+   ============================================================ */
+.aurora{
+  position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0;
+}
+.aurora i{
+  position:absolute; display:block; border-radius:50%;
+  filter:blur(100px); opacity:.34;
+}
+.aurora i:nth-child(1){width:52vw; height:52vw; left:-14vw; top:-22vw; background:radial-gradient(circle,#5A6068,transparent 68%)}
+.aurora i:nth-child(2){width:44vw; height:44vw; right:-12vw; top:-6vw; background:radial-gradient(circle,#3E4248,transparent 68%); opacity:.42}
+.aurora i:nth-child(3){width:38vw; height:38vw; left:34vw; top:26vw; background:radial-gradient(circle,#2A2D33,transparent 70%); opacity:.3}
+
+.grid-bg{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 20%,transparent 78%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 20%,transparent 78%);
+  opacity:.55;
+}
+
+/* ============================================================
+   Bottoni
+   ============================================================ */
+.btn{
+  --h:54px;
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  height:var(--h); padding-inline:26px;
+  border-radius:100px; border:1px solid transparent;
+  font-weight:600; font-size:.97rem; letter-spacing:-.01em;
+  cursor:pointer; white-space:nowrap;
+  transition:transform .25s cubic-bezier(.2,.8,.3,1), box-shadow .25s, background .25s, border-color .25s, color .25s;
+}
+.btn svg{width:17px; height:17px; flex:none; transition:transform .3s cubic-bezier(.2,.8,.3,1)}
+.btn:hover{transform:translateY(-2px)}
+.btn:hover svg{transform:translateX(3px)}
+.btn:active{transform:translateY(0)}
+
+.btn-primary{background:var(--grad); color:#08090A; box-shadow:var(--glow); background-size:150% 150%}
+.btn-primary:hover{box-shadow:0 0 0 1px rgba(255,255,255,.3),0 26px 60px -18px rgba(255,255,255,.34)}
+
+.btn-ghost{background:rgba(255,255,255,.04); border-color:var(--line-2); color:var(--txt); backdrop-filter:blur(12px)}
+.btn-ghost:hover{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.26)}
+
+.btn-sm{--h:44px; padding-inline:20px; font-size:.9rem}
+.btn-lg{--h:60px; padding-inline:34px; font-size:1.03rem}
+.btn-block{width:100%}
+
+/* ============================================================
+   Navbar
+   ============================================================ */
+.nav{
+  position:fixed; inset:0 0 auto 0; z-index:100;
+  transition:background .35s, border-color .35s, backdrop-filter .35s;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(6,7,11,.72);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border-bottom-color:var(--line);
+}
+.nav-in{display:flex; align-items:center; gap:28px; height:78px}
+
+.logo{display:flex; align-items:center; gap:11px; font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:1.08rem; letter-spacing:-.02em}
+/* solo il monogramma: nessuna piastrella, così non stacca dallo sfondo
+   quando la navbar passa allo stato "scrolled" */
+.logo-mark{
+  width:34px; flex:none; display:block;
+  transition:opacity .3s, transform .3s;
+}
+.logo:hover .logo-mark{opacity:.82}
+.logo-mark svg{width:100%; height:auto; display:block}
+.logo span{color:var(--dim); font-weight:500}
+
+.nav-links{display:flex; align-items:center; gap:4px; margin-left:auto}
+.nav-links a{
+  padding:9px 15px; border-radius:100px; font-size:.93rem; font-weight:500; color:var(--dim);
+  transition:color .2s, background .2s;
+}
+.nav-links a:hover{color:var(--txt); background:rgba(255,255,255,.06)}
+.nav-cta{display:flex; align-items:center; gap:12px}
+
+.burger{
+  display:none; position:relative; width:44px; height:44px; border-radius:12px; margin-left:auto;
+  background:rgba(255,255,255,.05); border:1px solid var(--line-2); cursor:pointer;
+}
+/* le tre barre sono posizionate in assoluto: così la X di chiusura è sempre simmetrica */
+.burger i{
+  position:absolute; left:50%; width:19px; height:1.6px; margin-left:-9.5px;
+  background:var(--txt); border-radius:2px; display:block;
+  transition:transform .3s cubic-bezier(.2,.8,.3,1), opacity .2s;
+}
+.burger i:nth-child(1){top:14px}
+.burger i:nth-child(2){top:20.2px}
+.burger i:nth-child(3){top:26.4px}
+.nav-open .burger i:nth-child(1){transform:translateY(6.2px) rotate(45deg)}
+.nav-open .burger i:nth-child(2){opacity:0}
+.nav-open .burger i:nth-child(3){transform:translateY(-6.2px) rotate(-45deg)}
+
+.mobile-menu{
+  position:fixed; inset:78px 0 0 0; z-index:99;
+  background:rgba(6,7,11,.97); backdrop-filter:blur(22px);
+  padding:28px var(--pad) 40px;
+  display:flex; flex-direction:column; gap:6px;
+  opacity:0; visibility:hidden; transform:translateY(-10px);
+  transition:opacity .3s, transform .3s, visibility 0s .3s;
+}
+.nav-open .mobile-menu{opacity:1; visibility:visible; transform:none; transition:opacity .3s, transform .3s, visibility 0s}
+.mobile-menu a{
+  padding:16px 4px; font-size:1.35rem; font-family:"Space Grotesk",sans-serif; font-weight:500;
+  letter-spacing:-.02em; border-bottom:1px solid var(--line);
+}
+.mobile-menu .btn{margin-top:26px}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero{padding-top:clamp(120px,15vw,178px); padding-bottom:clamp(70px,9vw,120px); overflow:hidden}
+.hero-in{position:relative; z-index:2; display:grid; grid-template-columns:1.03fr .97fr; gap:clamp(40px,5vw,70px); align-items:center}
+
+.badge{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:7px 16px 7px 14px; border-radius:100px;
+  background:rgba(255,255,255,.045); border:1px solid var(--line-2);
+  font-size:.84rem; color:var(--dim); font-weight:500; margin-bottom:28px;
+  backdrop-filter:blur(10px);
+}
+.badge b{color:var(--txt); font-weight:600}
+.badge>span{line-height:1.35}
+.pulse{width:7px; height:7px; border-radius:50%; background:#FFFFFF; box-shadow:0 0 0 0 rgba(255,255,255,.7); animation:pulse 2.4s infinite; flex:none; margin-top:1px}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+
+.hero h1{margin-bottom:26px}
+.hero .lead{max-width:620px; margin-bottom:38px; font-size:clamp(1.05rem,1.6vw,1.24rem)}
+.hero-actions{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:38px}
+
+.hero-proof{display:flex; flex-wrap:wrap; gap:14px 30px; color:var(--dim-2); font-size:.88rem}
+.hero-proof li{display:flex; align-items:center; gap:8px; list-style:none}
+.hero-proof svg{width:16px; height:16px; color:var(--acc-2); flex:none}
+.hero-proof ul{display:contents}
+
+/* --- mockup browser --- */
+.mockup{position:relative; perspective:1400px}
+.browser{
+  border-radius:var(--r-lg); overflow:hidden;
+  background:linear-gradient(160deg,#141517,#070708);
+  border:1px solid var(--line-2);
+  box-shadow:var(--shadow), 0 0 0 1px rgba(255,255,255,.03) inset;
+  transform:rotateY(-7deg) rotateX(3deg) translateZ(0);
+  transition:transform .7s cubic-bezier(.2,.8,.3,1);
+}
+.mockup:hover .browser{transform:rotateY(-3deg) rotateX(1deg)}
+.browser-bar{display:flex; align-items:center; gap:8px; padding:13px 16px; border-bottom:1px solid var(--line); background:rgba(255,255,255,.025)}
+.browser-bar u{width:10px; height:10px; border-radius:50%; background:#2C3446; display:block}
+.browser-bar .url{
+  flex:1; margin-left:10px; height:26px; border-radius:7px; background:rgba(255,255,255,.04);
+  display:flex; align-items:center; padding-inline:11px; font-size:.72rem; color:var(--dim-2); gap:7px;
+}
+.browser-body{padding:24px; display:grid; gap:18px}
+
+.skel{border-radius:8px; background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.1),rgba(255,255,255,.05)); background-size:200% 100%; animation:shim 3.2s linear infinite}
+@keyframes shim{to{background-position:-200% 0}}
+.skel.t1{height:13px; width:34%}
+.skel.t2{height:26px; width:82%}
+.skel.t3{height:26px; width:58%}
+.skel.btn-s{height:34px; width:128px; border-radius:100px; background:var(--grad); animation:none}
+.skel-row{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:6px}
+.skel-card{height:74px; border-radius:12px; background:rgba(255,255,255,.045); border:1px solid var(--line)}
+
+.score{
+  position:absolute; right:-14px; bottom:-26px; z-index:3;
+  background:rgba(12,14,22,.86); backdrop-filter:blur(16px);
+  border:1px solid var(--line-2); border-radius:var(--r);
+  padding:16px 20px; box-shadow:var(--shadow);
+  display:flex; align-items:center; gap:14px;
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-11px)}}
+.ring{position:relative; width:56px; height:56px; flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring circle{fill:none; stroke-width:5; stroke-linecap:round}
+.ring .bg{stroke:rgba(255,255,255,.09)}
+.ring .fg{stroke:url(#ringGrad); stroke-dasharray:151; stroke-dashoffset:151; transition:stroke-dashoffset 1.6s cubic-bezier(.2,.8,.3,1)}
+.ring b{position:absolute; inset:0; display:grid; place-items:center; font-size:.92rem; font-weight:700; font-family:"Space Grotesk",sans-serif}
+.score em{display:block; font-style:normal; font-size:.86rem; font-weight:600}
+.score small{color:var(--dim-2); font-size:.76rem}
+
+.float-tag{
+  position:absolute; left:-34px; top:33%; z-index:3;
+  background:rgba(12,14,22,.86); backdrop-filter:blur(16px);
+  border:1px solid var(--line-2); border-radius:14px; padding:11px 16px;
+  font-size:.82rem; font-weight:600; display:flex; align-items:center; gap:9px;
+  box-shadow:var(--shadow); animation:float 6s ease-in-out infinite .8s;
+}
+.float-tag svg{width:16px; height:16px; color:var(--acc-2)}
+
+/* ============================================================
+   Marquee settori
+   ============================================================ */
+.marquee-sec{padding-block:30px; border-block:1px solid var(--line); background:var(--bg-2)}
+.marquee-lbl{text-align:center; font-size:.74rem; letter-spacing:.15em; text-transform:uppercase; color:var(--dim-2); margin-bottom:22px; font-weight:600}
+.marquee{overflow:hidden; mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marquee-track{display:flex; gap:56px; width:max-content; animation:slide 32s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.marquee-track span{
+  font-family:"Space Grotesk",sans-serif; font-size:1.22rem; font-weight:500;
+  color:var(--dim-2); white-space:nowrap; display:flex; align-items:center; gap:12px;
+  transition:color .3s;
+}
+.marquee-track span::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--acc); opacity:.6}
+.marquee-track span:hover{color:var(--txt)}
+
+/* ============================================================
+   Card generiche
+   ============================================================ */
+.card{
+  position:relative; border-radius:var(--r-lg); padding:clamp(26px,3vw,34px);
+  background:linear-gradient(165deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+  border:1px solid var(--line);
+  overflow:hidden;
+  transition:transform .4s cubic-bezier(.2,.8,.3,1), border-color .4s, background .4s;
+}
+.card::after{
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .4s;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.16),transparent 62%);
+}
+.card:hover{transform:translateY(-5px); border-color:var(--line-2)}
+.card:hover::after{opacity:1}
+.card h3{margin-bottom:11px}
+.card p{color:var(--dim); font-size:.96rem; line-height:1.6}
+
+.ico{
+  width:48px; height:48px; border-radius:14px; display:grid; place-items:center; margin-bottom:22px;
+  background:var(--acc-soft); border:1px solid rgba(255,255,255,.24); color:#E4E7EC;
+}
+.ico svg{width:22px; height:22px}
+
+/* ============================================================
+   Problema
+   ============================================================ */
+.problem{background:var(--bg-2); border-block:1px solid var(--line)}
+.problem-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px}
+@media (min-width:1080px){ .problem-grid{grid-template-columns:repeat(4,1fr)} }
+
+/* ----- vetrine 3D (sostituiscono le card statistiche) ----- */
+.stat3d{display:flex; flex-direction:column; align-items:center; text-align:center; gap:20px; padding:12px 10px}
+.stat3d-stage{width:104px; height:104px; perspective:560px}
+.stat3d p{color:var(--dim); font-size:.92rem; line-height:1.58; max-width:230px}
+.stat3d p b{color:var(--txt); font-weight:600}
+
+.orbit3d{position:relative; width:100%; height:100%; transform-style:preserve-3d; animation:orbitSpin 11s linear infinite}
+.orbit3d i{position:absolute; inset:4px; transform-style:preserve-3d}
+.orbit3d i b{display:block; width:100%; height:100%; border-radius:50%}
+.orbit3d i:nth-child(1) b{border:1.5px solid rgba(255,255,255,.55); transform:rotateX(72deg)}
+.orbit3d i:nth-child(2) b{border:1.5px solid rgba(255,255,255,.32); transform:rotateX(72deg) rotateZ(58deg)}
+.orbit3d i:nth-child(3) b{border:1.5px solid rgba(255,255,255,.18); transform:rotateX(72deg) rotateZ(116deg)}
+.orbit3d em{position:absolute; inset:37%; border-radius:50%; background:var(--grad); box-shadow:0 0 20px rgba(255,255,255,.4)}
+@keyframes orbitSpin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+
+.stairs3d{position:relative; width:100%; height:100%; transform-style:preserve-3d; animation:stairsSpin 10s ease-in-out infinite}
+.stairs3d i{position:absolute; left:50%; width:72px; height:16px; margin-left:-36px; border-radius:6px; border:1px solid var(--line-2); background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.02))}
+.stairs3d i:nth-child(1){bottom:4px; transform:translateZ(-32px)}
+.stairs3d i:nth-child(2){bottom:26px; transform:translateZ(-11px)}
+.stairs3d i:nth-child(3){bottom:48px; transform:translateZ(11px)}
+.stairs3d i:nth-child(4){bottom:70px; transform:translateZ(32px); background:linear-gradient(160deg,rgba(255,255,255,.28),rgba(255,255,255,.05))}
+@keyframes stairsSpin{0%,100%{transform:rotateY(-28deg) rotateX(14deg)}50%{transform:rotateY(28deg) rotateX(6deg)}}
+
+.link3d{position:relative; width:100%; height:100%; transform-style:preserve-3d; animation:linkSpin 9s linear infinite}
+.link3d i{position:absolute; top:39px; width:26px; height:26px; border-radius:50%; border:1px solid var(--line-2); background:linear-gradient(160deg,rgba(255,255,255,.24),rgba(255,255,255,.04)); box-shadow:0 0 14px rgba(255,255,255,.28)}
+.link3d i:nth-child(1){left:4px}
+.link3d i:nth-child(2){right:4px}
+.link3d b{position:absolute; left:32px; right:32px; top:50px; height:3px; border-radius:2px; background:var(--grad)}
+@keyframes linkSpin{from{transform:rotateY(0) rotateX(-12deg)}to{transform:rotateY(360deg) rotateX(-12deg)}}
+
+.coin3d{position:relative; width:100%; height:100%; transform-style:preserve-3d; animation:coinSpin 7s linear infinite}
+.coin3d i{position:absolute; inset:0; border-radius:50%; display:grid; place-items:center; backface-visibility:hidden; border:1px solid var(--line-2); background:linear-gradient(160deg,rgba(255,255,255,.18),rgba(255,255,255,.03))}
+.coin3d i:nth-child(2){transform:rotateY(180deg)}
+.coin3d i svg{width:34px; height:34px; color:#E4E7EC}
+@keyframes coinSpin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+
+.problem-note{
+  margin-top:34px; padding:22px 26px; border-radius:var(--r);
+  border:1px solid var(--line); background:rgba(255,255,255,.025);
+  display:flex; gap:16px; align-items:flex-start; color:var(--dim); font-size:.96rem;
+}
+.problem-note svg{width:20px; height:20px; color:var(--acc-2); flex:none; margin-top:2px}
+.problem-note b{color:var(--txt)}
+
+/* ============================================================
+   Servizi
+   ============================================================ */
+.services-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px}
+@media (min-width:1080px){ .services-grid{grid-template-columns:repeat(3,1fr)} }
+.card .tag{
+  display:inline-block; margin-top:18px; font-size:.78rem; font-weight:600;
+  color:var(--dim-2); letter-spacing:.02em;
+}
+.card .tag b{color:#E4E7EC; font-weight:600}
+
+/* ============================================================
+   Confronto prima / dopo
+   ============================================================ */
+.compare{
+  position:relative; border-radius:var(--r-xl); overflow:hidden;
+  max-height:min(78vh,860px);
+  border:1px solid var(--line-2); box-shadow:var(--shadow);
+  aspect-ratio:16/7.6; user-select:none; touch-action:pan-y; cursor:ew-resize;
+  background:#070708;
+}
+.cmp-pane{position:absolute; inset:0; display:flex; flex-direction:column}
+.cmp-after{clip-path:inset(0 0 0 var(--pos,50%))}
+.cmp-head{
+  padding:11px 18px; display:flex; align-items:center; gap:8px;
+  border-bottom:1px solid var(--line); font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; font-weight:700;
+}
+.cmp-before .cmp-head{background:rgba(255,255,255,.035); color:var(--dim-2); border-bottom-color:var(--line)}
+.cmp-after .cmp-head{background:rgba(255,255,255,.09); color:#FFFFFF; border-bottom-color:rgba(255,255,255,.2); justify-content:flex-end}
+.cmp-body{flex:1; padding:clamp(18px,3vw,34px); overflow:hidden}
+
+/* versione "prima": tipico sito datato */
+.old{background:#F3F1EC; color:#333; height:100%; border-radius:6px; padding:clamp(14px,2.4vw,22px); font-family:Georgia,"Times New Roman",serif; overflow:hidden}
+.old .old-top{display:flex; align-items:center; justify-content:space-between; border-bottom:2px solid #9c9c9c; padding-bottom:9px; margin-bottom:14px}
+.old .old-logo{font-weight:700; font-size:clamp(.9rem,1.5vw,1.15rem); color:#1b3a6b}
+.old .old-nav{display:flex; gap:11px; font-size:clamp(.6rem,1vw,.72rem); color:#1b3a6b; text-decoration:underline}
+.old h4{margin:0 0 8px; font-size:clamp(.95rem,1.8vw,1.3rem); color:#1b3a6b}
+.old p{font-size:clamp(.62rem,1.05vw,.8rem); line-height:1.5; color:#4a4a4a; margin-bottom:9px}
+.old .old-btn{display:inline-block; background:linear-gradient(#dcdcdc,#b4b4b4); border:1px solid #8d8d8d; border-radius:3px; padding:5px 13px; font-size:clamp(.6rem,1vw,.72rem); color:#222; font-family:Arial,sans-serif}
+.old .old-cols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px; margin-top:14px}
+.old .old-box{background:#e6e3dc; border:1px solid #c8c4bb; height:clamp(34px,6vw,54px); border-radius:2px}
+.old .old-foot{margin-top:clamp(12px,2.2vw,20px); padding-top:9px; border-top:1px solid #c8c4bb; font-size:clamp(.52rem,.86vw,.66rem); color:#7a7a7a; line-height:1.45}
+
+/* versione "dopo": AAproject */
+.new{height:100%; border-radius:12px; background:linear-gradient(160deg,#141517,#080B14); border:1px solid rgba(255,255,255,.09); padding:clamp(14px,2.4vw,24px); overflow:hidden; position:relative}
+.new::before{content:""; position:absolute; width:60%; height:60%; right:-10%; top:-24%; background:radial-gradient(circle,rgba(255,255,255,.15),transparent 68%); filter:blur(28px)}
+.new-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:clamp(14px,2.6vw,26px); position:relative}
+.new-logo{display:flex; align-items:center; gap:7px; font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:clamp(.68rem,1.2vw,.9rem)}
+.new-logo u{width:clamp(16px,2.4vw,22px); height:clamp(16px,2.4vw,22px); border-radius:6px; background:var(--grad); display:block}
+.new-nav{display:flex; gap:clamp(8px,1.4vw,16px); font-size:clamp(.55rem,.95vw,.72rem); color:var(--dim-2)}
+.new-pill{padding:4px 11px; border-radius:100px; background:var(--grad); color:#08090A; font-size:clamp(.55rem,.95vw,.7rem); font-weight:600}
+.new h4{position:relative; font-family:"Space Grotesk",sans-serif; font-size:clamp(1rem,2.5vw,1.85rem); letter-spacing:-.03em; line-height:1.08; margin-bottom:9px; max-width:80%}
+.new p{position:relative; font-size:clamp(.6rem,1.05vw,.8rem); color:var(--dim); max-width:66%; margin-bottom:clamp(11px,1.8vw,17px)}
+.new-cta{position:relative; display:flex; gap:9px; margin-bottom:clamp(14px,2.4vw,22px)}
+.new-cta u{display:block; height:clamp(22px,3.4vw,32px); border-radius:100px}
+.new-cta u:nth-child(1){width:clamp(70px,11vw,112px); background:var(--grad)}
+.new-cta u:nth-child(2){width:clamp(56px,9vw,88px); border:1px solid var(--line-2)}
+.new-cols{position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(7px,1.2vw,12px)}
+.new-box{height:clamp(34px,6vw,58px); border-radius:9px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08)}
+.new-foot{position:relative; margin-top:clamp(12px,2.2vw,22px); padding-top:clamp(10px,1.6vw,16px); border-top:1px solid rgba(255,255,255,.08); display:flex; align-items:center; gap:9px; font-size:clamp(.55rem,.95vw,.72rem); color:var(--dim-2)}
+.new-foot u{width:6px; height:6px; border-radius:50%; background:#E4E7EC; display:block; flex:none}
+
+.cmp-handle{
+  position:absolute; top:0; bottom:0; left:var(--pos,50%); width:2px;
+  background:var(--grad); transform:translateX(-1px); z-index:5; pointer-events:none;
+  box-shadow:0 0 22px rgba(255,255,255,.5);
+}
+.cmp-knob{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:46px; height:46px; border-radius:50%;
+  background:rgba(10,12,20,.9); backdrop-filter:blur(10px);
+  border:1.5px solid rgba(255,255,255,.32);
+  display:grid; place-items:center; color:#fff;
+  box-shadow:0 10px 30px -8px rgba(0,0,0,.9);
+}
+.cmp-knob svg{width:22px; height:22px}
+.cmp-hint{
+  text-align:center; margin-top:20px; font-size:.86rem; color:var(--dim-2);
+  display:flex; align-items:center; justify-content:center; gap:9px;
+}
+.cmp-hint svg{width:15px; height:15px}
+
+/* ============================================================
+   Perché noi
+   ============================================================ */
+.why{background:var(--bg-2); border-block:1px solid var(--line)}
+.why-layout{display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(40px,5vw,72px); align-items:start}
+.why-list{display:grid; gap:14px}
+.why-item{
+  display:flex; gap:20px; padding:24px 26px; border-radius:var(--r);
+  border:1px solid var(--line); background:rgba(255,255,255,.022);
+  transition:border-color .35s, background .35s, transform .35s;
+}
+.why-item:hover{border-color:var(--line-2); background:rgba(255,255,255,.045); transform:translateX(5px)}
+.why-item .n{
+  font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:.85rem; flex:none;
+  width:34px; height:34px; border-radius:10px; display:grid; place-items:center;
+  background:var(--acc-soft); border:1px solid rgba(255,255,255,.26); color:#E4E7EC;
+}
+.why-item h3{font-size:1.06rem; margin-bottom:7px}
+.why-item p{color:var(--dim); font-size:.94rem; line-height:1.58}
+.why-cta{margin-top:34px; display:flex; flex-wrap:wrap; gap:14px}
+
+/* ============================================================
+   Processo
+   ============================================================ */
+.steps{display:grid; grid-template-columns:repeat(4,1fr); gap:0}
+.step{position:relative; padding:0 26px 0 0}
+.step:last-child{padding-right:0}
+.step-top{display:flex; align-items:center; gap:14px; margin-bottom:22px}
+.step-dot{
+  width:14px; height:14px; border-radius:50%; background:var(--bg-3);
+  border:2px solid var(--acc); flex:none; box-shadow:0 0 0 5px rgba(255,255,255,.12); position:relative; z-index:2;
+}
+.step-line{flex:1; height:1px; background:linear-gradient(90deg,rgba(255,255,255,.5),rgba(255,255,255,.06))}
+.step:last-child .step-line{background:linear-gradient(90deg,rgba(255,255,255,.5),transparent)}
+.step-k{font-size:.75rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--dim-2); margin-bottom:11px}
+.step h3{margin-bottom:10px; font-size:1.16rem}
+.step p{color:var(--dim); font-size:.93rem; line-height:1.58; padding-right:12px}
+
+/* ============================================================
+   Fascia valori
+   ============================================================ */
+.cta-band{background:var(--bg-2); border-block:1px solid var(--line)}
+.band{
+  display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(34px,4.6vw,64px); align-items:center;
+  padding:clamp(30px,4vw,54px);
+  border-radius:var(--r-xl); border:1px solid var(--line-2);
+  background:linear-gradient(150deg,rgba(255,255,255,.075),rgba(255,255,255,.015) 58%);
+  box-shadow:var(--shadow);
+}
+.band-side{display:grid; gap:26px}
+.band-list{list-style:none; margin:0; padding:0; display:grid; gap:13px}
+.band-list li{display:flex; gap:12px; font-size:.96rem; color:var(--dim); line-height:1.5}
+.band-list li svg{width:17px; height:17px; color:var(--acc-2); flex:none; margin-top:4px}
+.band-list b{color:var(--txt); font-weight:600}
+
+/* ============================================================
+   Tabelle (cookie policy)
+   ============================================================ */
+.table-wrap{
+  overflow-x:auto; -webkit-overflow-scrolling:touch;
+  border:1px solid var(--line); border-radius:var(--r-lg);
+  background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+}
+table{width:100%; border-collapse:collapse; min-width:660px; font-size:.92rem}
+caption{
+  caption-side:top; text-align:left; padding:20px 22px 0;
+  font-size:.78rem; letter-spacing:.13em; text-transform:uppercase; color:var(--dim-2); font-weight:700;
+}
+th,td{padding:15px 18px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+thead th{
+  font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color:var(--dim-2);
+  font-weight:700; white-space:nowrap; background:rgba(255,255,255,.03);
+}
+tbody td{color:var(--dim); line-height:1.55}
+tbody td:first-child{color:var(--txt); font-weight:600; font-family:"Space Grotesk",monospace; white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(255,255,255,.025)}
+.pill{
+  display:inline-block; padding:3px 11px; border-radius:100px; font-size:.74rem; font-weight:600;
+  border:1px solid var(--line-2); color:var(--txt); white-space:nowrap;
+}
+.pill.req{background:rgba(255,255,255,.1)}
+
+/* ============================================================
+   Banner cookie
+   ============================================================ */
+.cookie-bar{
+  position:fixed; left:0; right:0; bottom:0; z-index:120;
+  padding:0 var(--pad) max(16px,env(safe-area-inset-bottom));
+  opacity:0; transform:translateY(120%);
+  transition:opacity .4s cubic-bezier(.2,.8,.3,1), transform .45s cubic-bezier(.2,.8,.3,1);
+}
+.cookie-bar.show{opacity:1; transform:none}
+.cookie-in{
+  max-width:var(--max); margin:0 auto 16px;
+  display:flex; align-items:center; gap:clamp(18px,3vw,36px);
+  padding:20px 24px; border-radius:var(--r-lg);
+  background:rgba(10,10,11,.92); backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid var(--line-2); box-shadow:var(--shadow);
+}
+.cookie-txt{font-size:.88rem; color:var(--dim); line-height:1.55}
+.cookie-txt b{color:var(--txt); display:block; margin-bottom:3px; font-size:.94rem}
+.cookie-txt a{color:var(--txt); text-decoration:underline; text-underline-offset:3px}
+.cookie-actions{display:flex; gap:10px; flex:none}
+
+.link-btn{
+  background:none; border:0; padding:0; cursor:pointer; color:inherit;
+  text-decoration:underline; text-underline-offset:3px; font-size:inherit;
+}
+.link-btn:hover,.foot-bot a:hover{color:var(--txt)}
+.foot-bot a{text-decoration:underline; text-underline-offset:3px}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-layout{display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(34px,5vw,70px); align-items:start}
+.faq-list{display:grid; gap:0; border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{
+  width:100%; background:none; border:0; cursor:pointer; text-align:left;
+  padding:24px 0; display:flex; align-items:center; gap:20px;
+  font-family:"Space Grotesk",sans-serif; font-size:1.05rem; font-weight:500; letter-spacing:-.015em;
+  color:var(--txt); transition:color .25s;
+}
+.faq-q:hover{color:#E4E7EC}
+.faq-q span{flex:1}
+.faq-q i{
+  width:30px; height:30px; border-radius:50%; border:1px solid var(--line-2); flex:none;
+  display:grid; place-items:center; position:relative; transition:background .3s, border-color .3s, transform .3s;
+}
+.faq-q i::before,.faq-q i::after{content:""; position:absolute; background:var(--txt); border-radius:2px; transition:transform .3s, opacity .3s}
+.faq-q i::before{width:11px; height:1.6px}
+.faq-q i::after{width:1.6px; height:11px}
+.faq-item.open .faq-q i{background:var(--grad); border-color:transparent; transform:rotate(180deg)}
+.faq-item.open .faq-q i::after{opacity:0}
+.faq-a{overflow:hidden; height:0; transition:height .35s cubic-bezier(.3,.8,.3,1)}
+.faq-a div{padding:0 54px 26px 0; color:var(--dim); font-size:.97rem; line-height:1.65}
+
+/* ============================================================
+   Pagine legali (privacy / cookie) — sportelli a scomparsa
+   ============================================================ */
+.legal-list{max-width:760px; display:grid; gap:0; border-top:1px solid var(--line)}
+.legal-item{border-bottom:1px solid var(--line)}
+.legal-q{
+  width:100%; background:none; border:0; cursor:pointer; text-align:left;
+  padding:20px 0; display:flex; align-items:center; gap:20px;
+  font-family:"Space Grotesk",sans-serif; font-size:.98rem; font-weight:500; letter-spacing:-.015em;
+  color:var(--txt); transition:color .25s;
+}
+.legal-q:hover{color:#E4E7EC}
+.legal-q span{flex:1}
+.legal-q i{
+  width:28px; height:28px; border-radius:50%; border:1px solid var(--line-2); flex:none;
+  display:grid; place-items:center; position:relative; transition:background .3s, border-color .3s, transform .3s;
+}
+.legal-q i::before,.legal-q i::after{content:""; position:absolute; background:var(--txt); border-radius:2px; transition:transform .3s, opacity .3s}
+.legal-q i::before{width:10px; height:1.6px}
+.legal-q i::after{width:1.6px; height:10px}
+.legal-item.open .legal-q i{background:var(--grad); border-color:transparent; transform:rotate(180deg)}
+.legal-item.open .legal-q i::after{opacity:0}
+.legal-a{overflow:hidden; height:0; transition:height .35s cubic-bezier(.3,.8,.3,1)}
+.legal-a div{padding:0 40px 22px 0}
+.legal-a p{color:var(--dim); font-size:.93rem; line-height:1.65}
+.legal-a a{color:var(--txt); text-decoration:underline; text-underline-offset:2px}
+.legal-updated{margin-top:22px; padding-top:18px; border-top:1px solid var(--line); font-size:.82rem; color:var(--dim-2)}
+
+/* ============================================================
+   CTA finale + form
+   ============================================================ */
+.contact{position:relative; overflow:hidden}
+.contact-box{
+  position:relative; z-index:2;
+  border-radius:var(--r-xl); border:1px solid var(--line-2);
+  background:linear-gradient(150deg,rgba(255,255,255,.15),rgba(12,14,22,.9) 52%);
+  padding:clamp(34px,4.6vw,64px);
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,4.6vw,64px);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(14px);
+}
+.contact-box h2{margin-bottom:18px}
+.contact-list{list-style:none; padding:0; margin:30px 0 0; display:grid; gap:16px}
+.contact-list li{display:flex; gap:14px; align-items:flex-start; font-size:.95rem; color:var(--dim)}
+.contact-list svg{width:19px; height:19px; color:var(--acc-2); flex:none; margin-top:3px}
+.contact-list b{display:block; color:var(--txt); font-weight:600; font-size:.95rem}
+
+.form{display:grid; gap:15px}
+.field{display:grid; gap:8px}
+.field label{font-size:.83rem; font-weight:600; color:var(--dim); letter-spacing:.01em}
+.field label u{color:#FF8B8B; text-decoration:none}
+.field input,.field textarea,.field select{
+  width:100%; padding:14px 16px; border-radius:12px;
+  background:rgba(255,255,255,.04); border:1px solid var(--line-2);
+  font-size:.95rem; transition:border-color .25s, background .25s, box-shadow .25s;
+}
+.field textarea{resize:vertical; min-height:104px; font-family:inherit}
+.field select{appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239AA3B8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; background-size:17px; padding-right:42px}
+.field select option{background:#0F121B; color:var(--txt)}
+.field input::placeholder,.field textarea::placeholder{color:var(--dim-2)}
+.field input:focus,.field textarea:focus,.field select:focus{
+  outline:none; border-color:rgba(255,255,255,.65); background:rgba(255,255,255,.06);
+  box-shadow:0 0 0 4px rgba(255,255,255,.14);
+}
+.field.err input,.field.err textarea,.field.err select{border-color:#FF6B6B; box-shadow:0 0 0 4px rgba(255,107,107,.12)}
+.field .msg{font-size:.78rem; color:#FF8B8B; display:none}
+.field.err .msg{display:block}
+.consent-row{display:flex; gap:11px; align-items:flex-start; cursor:pointer; font-size:.85rem; font-weight:400; color:var(--dim); line-height:1.5}
+.consent-row input{width:17px; height:17px; margin-top:2px; flex:none; accent-color:var(--acc-2); cursor:pointer}
+.consent-row a{color:var(--txt); text-decoration:underline; text-underline-offset:2px}
+.field.consent.err .consent-row{color:#FF8B8B}
+.form-row{display:grid; grid-template-columns:1fr 1fr; gap:15px}
+.form-foot{font-size:.79rem; color:var(--dim-2); text-align:center; line-height:1.5}
+.form-ok{
+  display:none; padding:18px 20px; border-radius:12px; gap:13px; align-items:flex-start;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.24); color:var(--txt); font-size:.92rem;
+}
+.form-ok.show{display:flex}
+.form-ok svg{width:19px; height:19px; flex:none; margin-top:2px}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+footer{border-top:1px solid var(--line); background:var(--bg-2); padding-block:56px 34px}
+.foot-grid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:40px; margin-bottom:44px}
+.foot-brand p{color:var(--dim); font-size:.93rem; max-width:340px; margin-top:18px}
+.foot-col h4{font-size:.78rem; letter-spacing:.13em; text-transform:uppercase; color:var(--dim-2); margin-bottom:18px; font-family:"Inter",sans-serif; font-weight:700}
+.foot-col ul{list-style:none; padding:0; margin:0; display:grid; gap:11px}
+.foot-col a{color:var(--dim); font-size:.93rem; transition:color .2s}
+.foot-col a:hover{color:var(--txt)}
+.foot-bot{display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center; padding-top:26px; border-top:1px solid var(--line); color:var(--dim-2); font-size:.85rem}
+
+/* ============================================================
+   Bottone flottante mobile
+   ============================================================ */
+.sticky-cta{
+  position:fixed; left:16px; right:16px; bottom:16px; z-index:90;
+  display:none; opacity:0; transform:translateY(90px); transition:opacity .35s, transform .35s;
+}
+.sticky-cta.show{opacity:1; transform:none}
+/* la CTA flottante si ritira quando il footer entra in vista: niente pulsante
+   sopra ai contatti e nessuna fascia vuota in fondo alla pagina */
+.at-footer .sticky-cta,
+.cookie-open .sticky-cta{opacity:0; transform:translateY(90px); pointer-events:none}
+
+/* ============================================================
+   Reveal on scroll
+   ============================================================ */
+.rv{opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.2,.8,.3,1), transform .7s cubic-bezier(.2,.8,.3,1)}
+.rv.in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1; transform:none; transition:none}
+  .marquee-track,.skel,.pulse,.score,.float-tag{animation:none !important}
+  .stairs3d,.link3d,.orbit3d,.coin3d{animation:none !important; transform:rotateX(-14deg) rotateY(28deg) !important}
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width:1024px){
+  .hero-in{grid-template-columns:1fr; gap:56px}
+  .mockup{max-width:560px; margin-inline:auto; width:100%}
+  .browser{transform:none}
+  .float-tag{left:-10px}
+  .score{right:0}
+  .why-layout,.faq-layout{grid-template-columns:1fr; gap:36px}
+  .steps{grid-template-columns:1fr 1fr; gap:38px 0}
+  .band{grid-template-columns:1fr; gap:34px}
+  .contact-box{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr; gap:34px}
+}
+@media (max-width:760px){
+  .nav-links,.nav-cta{display:none}
+  .hide-sm{display:none}
+  .cmp-head span{display:none}
+  .cmp-head{padding-inline:14px; font-size:.66rem; letter-spacing:.07em}
+  .cmp-body{padding:14px}
+  .cmp-hint svg{display:none}
+  .old .old-foot,.new-foot{display:none}
+  .old .old-cols,.new-cols{margin-top:10px}
+  .burger{display:grid}
+  .steps{grid-template-columns:1fr; gap:32px}
+  .step{padding-right:0}
+  .compare{aspect-ratio:4/4.5}
+  .form-row{grid-template-columns:1fr}
+  .sticky-cta{display:flex}
+  .foot-grid{grid-template-columns:1fr; gap:30px}
+  .cookie-in{flex-direction:column; align-items:stretch; gap:16px; padding:18px}
+  .cookie-actions{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .cookie-actions .btn{width:100%}
+  table{min-width:560px}
+  th,td{padding:13px 14px}
+  .hero{padding-bottom:60px}
+  .score{position:static; margin-top:18px; animation:none; display:inline-flex}
+  .float-tag{display:none}
+}
+@media (max-width:420px){
+  .hero-actions .btn{width:100%}
+}
+
+/* ============================================================
+   Pagina 404
+   ============================================================ */
+/* niente centratura verticale rigida: con contenuti alti taglierebbe la parte
+   superiore su schermi bassi. Il padding gestisce l'offset della navbar. */
+.err{
+  position:relative; min-height:100svh; overflow:hidden;
+  padding:clamp(112px,13vw,150px) 0 clamp(70px,9vw,110px);
+}
+.err-in{position:relative; z-index:2; text-align:center; max-width:860px}
+
+.err-mark{width:clamp(52px,6vw,68px); margin:0 auto clamp(18px,2.4vw,26px); opacity:.9}
+.err-mark .logo-mark{width:100%}
+.err-mark svg{width:100%; height:auto; display:block}
+
+/* il "404" grande, in filigrana dietro al titolo */
+.err-code{
+  display:flex; align-items:center; justify-content:center; gap:clamp(4px,1vw,12px);
+  font-family:"Space Grotesk",sans-serif; font-weight:700; letter-spacing:-.06em;
+  font-size:clamp(5.5rem,14vw,10.5rem); line-height:.84;
+  margin-bottom:clamp(-10px,-1vw,0px);
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.02) 78%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  user-select:none; pointer-events:none;
+}
+.err-o{
+  width:.62em; height:.62em; border-radius:50%; flex:none;
+  border:.115em solid rgba(255,255,255,.13);
+  position:relative;
+}
+.err-o::after{
+  content:""; position:absolute; inset:-.115em; border-radius:50%;
+  border:.115em solid transparent; border-top-color:rgba(255,255,255,.55);
+  animation:spin404 3.4s linear infinite;
+}
+@keyframes spin404{to{transform:rotate(360deg)}}
+
+.err .eyebrow{margin-top:8px}
+.err .eyebrow::after{content:""; width:22px; height:1px; background:var(--grad)}
+.err h1{font-size:clamp(2.3rem,5.2vw,3.8rem); margin-bottom:22px}
+.err .lead{max-width:640px; margin:0 auto 38px}
+
+.err-actions{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:clamp(44px,5.5vw,68px)}
+
+.err-links{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:14px; text-align:left;
+  border-top:1px solid var(--line); padding-top:clamp(30px,3.6vw,44px);
+}
+.err-links a{
+  display:block; padding:20px 22px; border-radius:var(--r);
+  border:1px solid var(--line); background:rgba(255,255,255,.022);
+  transition:border-color .3s, background .3s, transform .3s;
+}
+.err-links a:hover{border-color:var(--line-2); background:rgba(255,255,255,.05); transform:translateY(-3px)}
+.err-links b{
+  display:block; font-family:"Space Grotesk",sans-serif; font-weight:600;
+  font-size:1rem; letter-spacing:-.02em; margin-bottom:7px;
+}
+.err-links span{display:block; color:var(--dim); font-size:.88rem; line-height:1.5}
+
+.page-404 .sticky-cta{display:none !important}
+
+@media (max-width:900px){ .err-links{grid-template-columns:1fr 1fr} }
+@media (max-width:560px){
+  .err-links{grid-template-columns:1fr}
+  .err-actions .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){ .err-o::after{animation:none} }
+
+/* nota a piè di pagina, discreta */
+.foot-note{
+  margin:18px 0 0; padding-top:16px; border-top:1px solid var(--line);
+  color:var(--dim-2); font-size:.76rem; line-height:1.5; opacity:.85;
+}
+
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23000'/%3E%3Cg fill='%23fff' transform='translate(0,88)'%3E%3Cpath d='M97 8 L189 214 L145 214 L97 104 L49 214 L5 214 Z'/%3E%3Cpath d='M303 8 L395 214 L351 214 L303 104 L255 214 L211 214 Z'/%3E%3Cpath d='M8 214 C64 150 138 106 218 97 C296 88 352 148 394 214 L340 214 C300 164 268 134 214 141 C154 149 92 180 54 214 Z'/%3E%3C/g%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo" aria-label="AAproject, torna all'inizio">
+      <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 400 224" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="aaNav" x1="14%" y1="96%" x2="86%" y2="4%"><stop offset="0%" stop-color="#7E848D"/><stop offset="34%" stop-color="#C9CDD3"/><stop offset="62%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#B4BAC2"/></linearGradient></defs><g fill="url(#aaNav)"><path d="M97 8 L189 214 L145 214 L97 104 L49 214 L5 214 Z"/><path d="M303 8 L395 214 L351 214 L303 104 L255 214 L211 214 Z"/><path d="M8 214 C64 150 138 106 218 97 C296 88 352 148 394 214 L340 214 C300 164 268 134 214 141 C154 149 92 180 54 214 Z"/></g></svg></span>
+      AA<span>project</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Navigazione principale">
+      <a href="#servizi">Servizi</a>
+      <a href="#confronto">Prima / Dopo</a>
+      <a href="#metodo">Metodo</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="nav-cta">
+      <a href="#contatti" class="btn btn-primary btn-sm">
+        Contattaci
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+    <button class="burger" id="burger" aria-label="Apri il menu" aria-expanded="false" aria-controls="mobileMenu">
+      <i></i><i></i><i></i>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#servizi">Servizi</a>
+  <a href="#confronto">Prima / Dopo</a>
+  <a href="#metodo">Metodo</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contatti" class="btn btn-primary btn-block">Contattaci</a>
+</div>
+
+<main id="top">
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <div class="wrap hero-in">
+    <div>
+      <div class="badge">
+        <span class="pulse" aria-hidden="true"></span>
+        <span>Web agency <b>italiana</b></span>
+      </div>
+
+      <h1><span class="grad-txt">La tua azienda merita un sito all'altezza.</span></h1>
+
+      <p class="lead">
+        Progettiamo e sviluppiamo siti web moderni, velocissimi e perfetti su ogni dispositivo.
+        Non un sito qualsiasi: uno strumento costruito per farti percepire come leader del tuo settore.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contatti" class="btn btn-primary btn-lg">
+          Contattaci
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#confronto" class="btn btn-ghost btn-lg">Guarda un esempio</a>
+      </div>
+
+      <ul class="hero-proof">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Codice pulito e performante</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Ottimizzazione mobile e SEO</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Design 100% su misura</li>
+      </ul>
+    </div>
+
+    <div class="mockup">
+      <div class="float-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg>
+        Caricamento in 0,9s
+      </div>
+
+      <div class="browser">
+        <div class="browser-bar">
+          <u></u><u></u><u></u>
+          <div class="url">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+            iltuobrand.it
+          </div>
+        </div>
+        <div class="browser-body">
+          <div class="skel t1"></div>
+          <div class="skel t2"></div>
+          <div class="skel t3"></div>
+          <div class="skel btn-s"></div>
+          <div class="skel-row">
+            <div class="skel-card"></div><div class="skel-card"></div><div class="skel-card"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="score">
+        <div class="ring">
+          <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true">
+            <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#8B9099"/><stop offset="55%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#C9CDD3"/>
+            </linearGradient></defs>
+            <circle class="bg" cx="28" cy="28" r="24"/>
+            <circle class="fg" id="scoreRing" cx="28" cy="28" r="24"/>
+          </svg>
+          <b id="scoreNum">0</b>
+        </div>
+        <div>
+          <em>Performance Google</em>
+          <small>l'obiettivo per ogni sito che realizziamo</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SETTORI ═══════════════ -->
+<section class="marquee-sec">
+  <div class="marquee-lbl">Pronti a lavorare con aziende di ogni settore</div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marquee">
+      <span>Studi professionali</span><span>Ristorazione</span><span>Edilizia &amp; Impiantistica</span>
+      <span>Immobiliare</span><span>Manifatturiero</span><span>Wellness &amp; Beauty</span>
+      <span>Automotive</span><span>Consulenza</span><span>Retail</span><span>Turismo &amp; Hospitality</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PROBLEMA ═══════════════ -->
+<section class="sec problem">
+  <div class="wrap">
+    <div class="sec-head center rv">
+      <span class="eyebrow">Chi siamo</span>
+      <h2>Un'agenzia agli inizi.<br><span class="accent">Un impegno che non lo è.</span></h2>
+      <p class="lead">AAproject è un progetto giovane: siamo partiti da poco e stiamo costruendo i nostri
+        primi progetti insieme alle aziende che decidono di darci fiducia. Non abbiamo ancora un lungo
+        elenco di clienti alle spalle — abbiamo però tutto il tempo, la cura e la voglia di far bene che
+        un'agenzia già piena di lavoro non può più permettersi di dare a un singolo progetto.</p>
+    </div>
+
+    <div class="problem-grid">
+      <div class="stat3d rv">
+        <div class="stat3d-stage"><div class="orbit3d" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><em></em></div></div>
+        <p><b>Attenzione dedicata</b>, non uno tra centinaia: all'inizio ogni progetto riceve tutto il tempo che merita.</p>
+      </div>
+      <div class="stat3d rv">
+        <div class="stat3d-stage"><div class="stairs3d" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+        <p><b>Metodo strutturato</b>, con un processo chiaro dalla prima chiacchierata fino al lancio del sito.</p>
+      </div>
+      <div class="stat3d rv">
+        <div class="stat3d-stage"><div class="link3d" aria-hidden="true"><i></i><i></i><b></b></div></div>
+        <p><b>Dialogo diretto</b> con chi realizza concretamente il tuo sito, senza passaggi né intermediari.</p>
+      </div>
+      <div class="stat3d rv">
+        <div class="stat3d-stage">
+          <div class="coin3d" aria-hidden="true">
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></i>
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></i>
+          </div>
+        </div>
+        <p><b>Tecnologie aggiornate</b>: nessuna abitudine da disimparare, solo pratiche moderne fin dal primo sito.</p>
+      </div>
+    </div>
+
+    <div class="problem-note rv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5M12 8h.01"/></svg>
+      <p><b>Perché fidarsi di chi è agli inizi:</b> perché ogni sito che realizziamo è il nostro biglietto
+        da visita. Ci mettiamo il massimo impegno per costruire, insieme ai nostri primi clienti, la
+        reputazione di AAproject — e tu, scegliendo ora, hai la nostra priorità assoluta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SERVIZI ═══════════════ -->
+<section class="sec" id="servizi">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Cosa realizziamo</span>
+      <h2>Soluzioni digitali costruite<br>attorno ai tuoi obiettivi.</h2>
+      <p class="lead">Niente template riciclati. Ogni progetto parte dal tuo settore, dai tuoi clienti
+        e da ciò che ti serve davvero ottenere.</p>
+    </div>
+
+    <div class="services-grid">
+      <article class="card rv">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h3>Siti web aziendali</h3>
+        <p>La vetrina digitale della tua impresa: struttura chiara, contenuti persuasivi e un design
+          che comunica solidità dal primo secondo.</p>
+        <span class="tag">Ideale per <b>PMI, studi, aziende di servizi</b></span>
+      </article>
+
+      <article class="card rv">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></div>
+        <h3>E-commerce</h3>
+        <p>Negozi online curati in ogni dettaglio: catalogo, pagamenti sicuri, spedizioni e un percorso
+          d'acquisto pensato per ridurre gli abbandoni.</p>
+        <span class="tag">Ideale per <b>retail e produttori</b></span>
+      </article>
+
+      <article class="card rv">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 .9-4.5 4.3 1.1 6.3L12 16.5 6.4 19.5l1.1-6.3L3 8.9 9 8z"/></svg></div>
+        <h3>Landing page</h3>
+        <p>Pagine singole ad altissima conversione per campagne, lanci di prodotto e raccolta contatti.
+          Un obiettivo, zero distrazioni.</p>
+        <span class="tag">Ideale per <b>campagne Google &amp; Meta Ads</b></span>
+      </article>
+
+      <article class="card rv">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-3-6.7"/><path d="M21 3v6h-6"/></svg></div>
+        <h3>Restyling &amp; migrazioni</h3>
+        <p>Hai già un sito ma non ti rappresenta più? Lo ricostruiamo da zero mantenendo posizionamento,
+          contenuti e traffico esistente.</p>
+        <span class="tag">Ideale per <b>siti con più di 3 anni</b></span>
+      </article>
+
+      <article class="card rv">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
+        <h3>SEO &amp; visibilità</h3>
+        <p>Struttura tecnica, velocità e contenuti ottimizzati perché la tua azienda venga trovata
+          da chi cerca esattamente ciò che offri.</p>
+        <span class="tag">Incluso in <b>ogni progetto</b></span>
+      </article>
+
+      <article class="card rv">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Gestione &amp; assistenza</h3>
+        <p>Hosting, backup, aggiornamenti di sicurezza e modifiche ai contenuti. Tu pensi al lavoro,
+          del sito ci occupiamo noi.</p>
+        <span class="tag">Servizio <b>continuativo opzionale</b></span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONFRONTO ═══════════════ -->
+<section class="sec" id="confronto" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head center rv">
+      <span class="eyebrow">Un esempio pratico</span>
+      <h2>Lo stesso business.<br>Due prime impressioni opposte.</h2>
+      <p class="lead">Trascina il cursore per vedere, con un caso illustrativo, come lavoriamo per trasformare
+        un sito datato in una vetrina digitale moderna.</p>
+    </div>
+
+    <div class="compare rv" id="compare" role="slider" tabindex="0"
+         aria-label="Confronto tra il sito prima e dopo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+
+      <!-- PRIMA -->
+      <div class="cmp-pane cmp-before">
+        <div class="cmp-head">Prima<span> — sito datato</span></div>
+        <div class="cmp-body">
+          <div class="old">
+            <div class="old-top">
+              <div class="old-logo">Rossi &amp; Partners S.r.l.</div>
+              <div class="old-nav"><span>Home</span><span>Chi siamo</span><span>Contatti</span></div>
+            </div>
+            <h4>Benvenuti nel nostro sito internet</h4>
+            <p>La nostra azienda opera nel settore da oltre vent'anni offrendo alla propria clientela
+              servizi di alta qualità e massima serietà. Per qualsiasi informazione non esitate a contattarci
+              telefonicamente negli orari di ufficio.</p>
+            <span class="old-btn">Clicca qui &raquo;</span>
+            <div class="old-cols"><div class="old-box"></div><div class="old-box"></div><div class="old-box"></div></div>
+            <p class="old-foot">Rossi &amp; Partners S.r.l. — Via Roma 1, Milano — Tel. 02 1234567 — P.IVA 01234567890<br>
+              Sito ottimizzato per Internet Explorer 1024x768</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOPO -->
+      <div class="cmp-pane cmp-after" id="cmpAfter">
+        <div class="cmp-head"><span>Dopo — </span>by AAproject</div>
+        <div class="cmp-body">
+          <div class="new">
+            <div class="new-top">
+              <div class="new-logo"><u></u> Rossi &amp; Partners</div>
+              <div class="new-nav"><span>Servizi</span><span>Progetti</span><span>Team</span></div>
+              <span class="new-pill">Parla con noi</span>
+            </div>
+            <h4>Vent'anni di esperienza, al servizio della tua impresa.</h4>
+            <p>Consulenza specializzata per aziende che vogliono crescere in modo strutturato e misurabile.</p>
+            <div class="new-cta"><u></u><u></u></div>
+            <div class="new-cols"><div class="new-box"></div><div class="new-box"></div><div class="new-box"></div></div>
+            <div class="new-foot"><u></u><span>Ti rispondiamo entro 24h</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cmp-handle" id="cmpHandle" aria-hidden="true">
+        <div class="cmp-knob">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <p class="cmp-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg>
+      Trascina per confrontare<span class="hide-sm"> — oppure usa le frecce della tastiera</span>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════ PERCHÉ NOI ═══════════════ -->
+<section class="sec why">
+  <div class="wrap why-layout">
+    <div class="rv">
+      <span class="eyebrow">Perché AAproject</span>
+      <h2>Un partner tecnico,<br>non un fornitore.</h2>
+      <p class="lead" style="margin-top:20px">
+        Costruiamo ogni sito con lo stesso standard che ci aspetteremmo per la nostra azienda:
+        codice pulito, prestazioni reali e un design che invecchia bene.
+      </p>
+      <div class="why-cta">
+        <a href="#servizi" class="btn btn-primary">
+          Scopri i nostri servizi
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="why-list">
+      <div class="why-item rv">
+        <span class="n">01</span>
+        <div>
+          <h3>Velocità che si sente davvero</h3>
+          <p>Sviluppiamo siti leggeri e ottimizzati: pagine che si aprono in meno di un secondo,
+            perché ogni secondo di attesa è un potenziale cliente in meno.</p>
+        </div>
+      </div>
+      <div class="why-item rv">
+        <span class="n">02</span>
+        <div>
+          <h3>Perfetti su ogni schermo</h3>
+          <p>Smartphone, tablet, desktop: progettiamo partendo dal mobile, dove oggi si trova
+            la maggior parte dei tuoi clienti.</p>
+        </div>
+      </div>
+      <div class="why-item rv">
+        <span class="n">03</span>
+        <div>
+          <h3>Design su misura, mai un template</h3>
+          <p>Ogni interfaccia nasce dalla tua identità: colori, tono, immagini e struttura
+            costruiti per il tuo settore e per il tuo cliente tipo.</p>
+        </div>
+      </div>
+      <div class="why-item rv">
+        <span class="n">04</span>
+        <div>
+          <h3>Pensato per generare contatti</h3>
+          <p>Ogni pagina ha un obiettivo preciso: far compiere un'azione. Moduli, chiamate,
+            richieste di informazioni. Un sito bello che non funziona, per noi, è un sito incompleto.</p>
+        </div>
+      </div>
+      <div class="why-item rv">
+        <span class="n">05</span>
+        <div>
+          <h3>Comunicazione chiara e trasparente</h3>
+          <p>Aggiornamenti costanti durante ogni fase del progetto, senza tecnicismi
+            e senza sorprese lungo il percorso.</p>
+        </div>
+      </div>
+      <div class="why-item rv">
+        <span class="n">06</span>
+        <div>
+          <h3>Autonomia totale, se la vuoi</h3>
+          <p>Ti consegniamo un pannello semplice per aggiornare testi, immagini e novità.
+            Oppure ce ne occupiamo noi: decidi tu.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ METODO ═══════════════ -->
+<section class="sec" id="metodo">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Il nostro metodo</span>
+      <h2>Dal primo contatto<br>al sito online in 4 passi.</h2>
+      <p class="lead">Un percorso chiaro, senza tecnicismi e senza sorprese. Sai sempre a che punto siamo.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step rv">
+        <div class="step-top"><span class="step-dot"></span><span class="step-line"></span></div>
+        <div class="step-k">Passo 01</div>
+        <h3>Ascolto e analisi</h3>
+        <p>Studiamo il tuo settore, i concorrenti e i tuoi obiettivi, per capire davvero
+          di cosa ha bisogno la tua azienda.</p>
+      </div>
+      <div class="step rv">
+        <div class="step-top"><span class="step-dot"></span><span class="step-line"></span></div>
+        <div class="step-k">Passo 02</div>
+        <h3>Strategia e design</h3>
+        <p>Definiamo struttura, messaggi e identità visiva. Prima di scrivere una riga di codice
+          vedi l'anteprima del tuo nuovo sito e la approvi.</p>
+      </div>
+      <div class="step rv">
+        <div class="step-top"><span class="step-dot"></span><span class="step-line"></span></div>
+        <div class="step-k">Passo 03</div>
+        <h3>Sviluppo</h3>
+        <p>Costruiamo il sito con attenzione a velocità, sicurezza e SEO, testandolo su tutti i
+          dispositivi e i browser principali.</p>
+      </div>
+      <div class="step rv">
+        <div class="step-top"><span class="step-dot"></span><span class="step-line"></span></div>
+        <div class="step-k">Passo 04</div>
+        <h3>Lancio e supporto</h3>
+        <p>Pubblichiamo, colleghiamo gli strumenti di analisi e ti affianchiamo dopo il lancio
+          per misurare i risultati e migliorarli.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FASCIA PREVENTIVO ═══════════════ -->
+<section class="sec cta-band" id="valori">
+  <div class="wrap">
+    <div class="band rv">
+      <div>
+        <span class="eyebrow">Il nostro impegno</span>
+        <h2>Ogni azienda è diversa.<br>Ogni progetto anche.</h2>
+        <p class="lead" style="margin-top:18px">
+          Non lavoriamo con template preconfezionati: studiamo la tua situazione, capiamo cosa ti serve davvero
+          e costruiamo un progetto pensato per la tua azienda.
+        </p>
+      </div>
+
+      <div class="band-side">
+        <ul class="band-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Design <b>su misura</b>, mai un template</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Codice pulito e prestazioni <b>reali</b></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Comunicazione chiara in ogni fase</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Assistenza anche dopo il lancio</span></li>
+        </ul>
+        <a href="#contatti" class="btn btn-primary btn-lg btn-block">
+          Contattaci
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FAQ ═══════════════ -->
+<section class="sec" id="faq">
+  <div class="wrap faq-layout">
+    <div class="rv">
+      <span class="eyebrow">Domande frequenti</span>
+      <h2>Le risposte<br>che cerchi.</h2>
+      <p class="lead" style="margin-top:20px">Non trovi quello che ti serve?
+        Scrivici: rispondiamo entro 24 ore lavorative, senza impegno.</p>
+      <a href="#contatti" class="btn btn-ghost" style="margin-top:26px">Fai la tua domanda</a>
+    </div>
+
+    <div class="faq-list rv">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Con che tipo di aziende volete lavorare?</span><i aria-hidden="true"></i></button>
+        <div class="faq-a"><div>Siamo aperti a collaborare con aziende di qualsiasi settore: studi professionali,
+          ristorazione, edilizia, immobiliare, manifatturiero, wellness, automotive, consulenza, retail e turismo.
+          Non avendo ancora una specializzazione settoriale stretta, portiamo un approccio flessibile: ogni
+          progetto parte da zero, dalle esigenze specifiche del settore e dell'azienda.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Quanto tempo serve per avere il sito online?</span><i aria-hidden="true"></i></button>
+        <div class="faq-a"><div>In genere dalle 2 alle 3 settimane dall'approvazione del progetto grafico.
+          I tempi dipendono soprattutto dalla velocità con cui riceviamo testi, immagini e materiali:
+          se preferisci, ce ne occupiamo noi e i tempi restano invariati.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Devo avere già testi, foto e logo?</span><i aria-hidden="true"></i></button>
+        <div class="faq-a"><div>No. Se hai già dei materiali li valorizziamo, altrimenti ci occupiamo noi
+          di scrittura dei testi, selezione delle immagini e, se serve, del rinnovo dell'identità visiva.
+          Ti diciamo sempre in anticipo cosa è incluso e cosa no.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Posso aggiornare il sito da solo?</span><i aria-hidden="true"></i></button>
+        <div class="faq-a"><div>Sì. Su richiesta consegniamo un pannello di gestione semplice, con una breve
+          formazione inclusa: puoi modificare testi, immagini, prodotti e novità in autonomia.
+          Se preferisci non pensarci, esiste il servizio di gestione continuativa.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Il sito sarà visibile su Google?</span><i aria-hidden="true"></i></button>
+        <div class="faq-a"><div>Ogni sito nasce con le fondamenta SEO corrette: struttura semantica,
+          velocità, contenuti ottimizzati, sitemap e collegamento a Google Search Console.
+          Il posizionamento su parole chiave competitive richiede poi un lavoro continuativo,
+          che possiamo seguire come attività dedicata.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Cosa succede dopo la consegna?</span><i aria-hidden="true"></i></button>
+        <div class="faq-a"><div>Non pubblichiamo il sito per poi sparire. Restiamo a disposizione per tutto il periodo
+          di assistenza incluso nel progetto e, se vuoi, proseguiamo con un servizio di manutenzione
+          che comprende backup, aggiornamenti di sicurezza e modifiche ai contenuti.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Il sito rimane di mia proprietà?</span><i aria-hidden="true"></i></button>
+        <div class="faq-a"><div>Sempre. Dominio, contenuti e sito sono intestati alla tua azienda.
+          Non ti leghiamo a canoni obbligatori: se un domani vuoi cambiare fornitore,
+          ti consegniamo tutto senza ostacoli.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span>Lavorate anche a distanza?</span><i aria-hidden="true"></i></button>
+        <div class="faq-a"><div>Sì, seguiamo aziende in tutta Italia. Videochiamate, condivisione delle anteprime
+          e aggiornamenti costanti rendono la collaborazione a distanza semplice quanto quella in presenza.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTATTI ═══════════════ -->
+<section class="sec contact" id="contatti">
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <div class="contact-box rv">
+      <div>
+        <span class="eyebrow">Contatti</span>
+        <h2>Parliamo del tuo<br>prossimo progetto<br><span class="accent">digitale.</span></h2>
+        <p class="lead" style="margin-top:18px">
+          Raccontaci in due righe la tua azienda e cosa stai cercando: un sito nuovo, un restyling
+          o semplicemente qualche informazione in più su come lavoriamo. Ti rispondiamo al più presto.
+        </p>
+
+        <ul class="contact-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <div><b>Risposta entro 24 ore</b>Nei giorni lavorativi, sempre da una persona reale.</div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
+            <div><b>AAdevelopmentproject@gmail.com</b>Scrivici direttamente, se preferisci.</div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-11a8 8 0 10-16 0c0 6.5 8 11 8 11z"/><circle cx="12" cy="11" r="3"/></svg>
+            <div><b>Italia · da remoto</b>Seguiamo progetti in tutto il Paese.</div>
+          </li>
+        </ul>
+      </div>
+
+      <form class="form" id="form" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="f-nome">Nome e cognome <u>*</u></label>
+            <input id="f-nome" name="nome" type="text" placeholder="Mario Rossi" autocomplete="name" required>
+            <span class="msg">Inserisci il tuo nome.</span>
+          </div>
+          <div class="field">
+            <label for="f-azienda">Azienda</label>
+            <input id="f-azienda" name="azienda" type="text" placeholder="Rossi S.r.l." autocomplete="organization">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="f-email">Email <u>*</u></label>
+            <input id="f-email" name="email" type="email" placeholder="mario@azienda.it" autocomplete="email" required>
+            <span class="msg">Inserisci un indirizzo email valido.</span>
+          </div>
+          <div class="field">
+            <label for="f-tel">Telefono</label>
+            <input id="f-tel" name="telefono" type="tel" placeholder="+39 333 1234567" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-sito">Sito attuale (se ne hai uno)</label>
+          <input id="f-sito" name="sito" type="text" placeholder="www.tuosito.it" inputmode="url">
+        </div>
+
+        <div class="field">
+          <label for="f-tipo">Di cosa hai bisogno? <u>*</u></label>
+          <select id="f-tipo" name="tipo" required>
+            <option value="">Seleziona un'opzione…</option>
+            <option>Nuovo sito aziendale</option>
+            <option>Restyling del sito esistente</option>
+            <option>E-commerce</option>
+            <option>Landing page per campagne</option>
+            <option>SEO e visibilità</option>
+            <option>Non lo so ancora, vorrei un consiglio</option>
+          </select>
+          <span class="msg">Seleziona il tipo di progetto.</span>
+        </div>
+
+        <div class="field">
+          <label for="f-msg">Raccontaci il progetto</label>
+          <textarea id="f-msg" name="messaggio" placeholder="Di cosa si occupa la tua azienda, cosa vorresti ottenere dal nuovo sito, tempistiche…"></textarea>
+        </div>
+
+        <div class="field consent">
+          <label class="consent-row" for="f-privacy">
+            <input id="f-privacy" name="privacy" type="checkbox" required>
+            <span>Ho letto l'<a href="#privacy">informativa sulla privacy</a> e acconsento al trattamento dei miei dati per essere ricontattato/a. <u>*</u></span>
+          </label>
+          <span class="msg">Devi accettare l'informativa privacy per inviare il messaggio.</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
+          Invia messaggio
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+
+        <div class="form-ok" id="formOk">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+          <span id="formOkTxt">Messaggio pronto all'invio.</span>
+        </div>
+
+        <p class="form-foot">Inviando accetti di essere ricontattato da AAproject. I tuoi dati non vengono ceduti a terzi.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ INFORMATIVA PRIVACY ═══════════════ -->
+<section class="sec legal" id="privacy">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Trattamento dei dati</span>
+      <h2>Informativa sulla privacy</h2>
+      <p class="lead">Ai sensi degli artt. 13 e 14 del Regolamento (UE) 2016/679 ("GDPR"), questa informativa
+        descrive come vengono trattati i dati personali di chi visita questo sito o compila il modulo di contatto.</p>
+    </div>
+
+    <div class="legal-list rv">
+      <div class="legal-item">
+        <button class="legal-q" aria-expanded="false"><span>1. Titolare del trattamento</span><i aria-hidden="true"></i></button>
+        <div class="legal-a"><div><p>Il titolare del trattamento è <b>Alfonso Merito</b>, contattabile all'indirizzo email
+          <a href="mailto:AAdevelopmentproject@gmail.com">AAdevelopmentproject@gmail.com</a>. Il sito è gestito
+          come attività individuale non costituita in forma societaria.</p></div></div>
+      </div>
+      <div class="legal-item">
+        <button class="legal-q" aria-expanded="false"><span>2. Dati raccolti</span><i aria-hidden="true"></i></button>
+        <div class="legal-a"><div><p>Vengono trattati esclusivamente i dati forniti volontariamente tramite il modulo di contatto
+          (nome e cognome, eventuale azienda, indirizzo email, telefono, sito web attuale, tipologia di richiesta
+          e messaggio). Il sito non utilizza cookie di profilazione né strumenti di analisi o tracciamento
+          di terze parti, quindi non vengono raccolti dati di navigazione a fini statistici o pubblicitari.</p></div></div>
+      </div>
+      <div class="legal-item">
+        <button class="legal-q" aria-expanded="false"><span>3. Finalità e base giuridica</span><i aria-hidden="true"></i></button>
+        <div class="legal-a"><div><p>I dati sono trattati al solo scopo di rispondere alla richiesta di contatto o di preventivo inviata
+          dall'interessato. La base giuridica del trattamento è il consenso esplicito prestato tramite l'apposita
+          casella al momento dell'invio del modulo (art. 6.1.a GDPR). I dati non vengono utilizzati per finalità
+          di marketing salvo consenso specifico e separato.</p></div></div>
+      </div>
+      <div class="legal-item">
+        <button class="legal-q" aria-expanded="false"><span>4. Modalità del trattamento e destinatari</span><i aria-hidden="true"></i></button>
+        <div class="legal-a"><div><p>I dati inviati tramite il modulo vengono ricevuti direttamente via email e non sono ceduti, venduti
+          o comunicati a terzi, salvo obblighi di legge. Non è previsto alcun trasferimento di dati verso paesi
+          extra-UE: anche le risorse tecniche del sito (font, immagini) sono ospitate in locale e non richiedono
+          connessioni a server di terze parti.</p></div></div>
+      </div>
+      <div class="legal-item">
+        <button class="legal-q" aria-expanded="false"><span>5. Periodo di conservazione</span><i aria-hidden="true"></i></button>
+        <div class="legal-a"><div><p>I dati sono conservati per il tempo necessario a gestire la richiesta e, successivamente, per un
+          massimo di 24 mesi, salvo l'instaurazione di un rapporto professionale che richieda una conservazione
+          più lunga secondo gli obblighi di legge applicabili.</p></div></div>
+      </div>
+      <div class="legal-item">
+        <button class="legal-q" aria-expanded="false"><span>6. Diritti dell'interessato</span><i aria-hidden="true"></i></button>
+        <div class="legal-a"><div><p>In qualsiasi momento è possibile esercitare i diritti previsti dagli artt. 15-22 del GDPR (accesso,
+          rettifica, cancellazione, limitazione, opposizione, portabilità dei dati) scrivendo a
+          <a href="mailto:AAdevelopmentproject@gmail.com">AAdevelopmentproject@gmail.com</a>. È inoltre possibile
+          proporre reclamo al Garante per la protezione dei dati personali (www.garanteprivacy.it).</p></div></div>
+      </div>
+      <div class="legal-item">
+        <button class="legal-q" aria-expanded="false"><span>7. Conferimento dei dati</span><i aria-hidden="true"></i></button>
+        <div class="legal-a"><div><p>Il conferimento dei dati contrassegnati come obbligatori nel modulo è necessario per poter rispondere
+          alla richiesta; in mancanza, non sarà possibile dare seguito alla richiesta stessa.</p></div></div>
+      </div>
+    </div>
+    <p class="legal-updated rv">Ultimo aggiornamento: settembre 2026.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ COOKIE POLICY ═══════════════ -->
+<section class="sec legal" id="cookie" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Cookie</span>
+      <h2>Cookie policy</h2>
+      <p class="lead">Informativa sui cookie ai sensi dell'art. 122 del Codice Privacy e delle Linee guida
+        del Garante Privacy in materia di cookie e altri strumenti di tracciamento (9 luglio 2021).</p>
+    </div>
+
+    <div class="legal-list rv">
+      <div class="legal-item">
+        <button class="legal-q" aria-expanded="false"><span>Questo sito non installa cookie</span><i aria-hidden="true"></i></button>
+        <div class="legal-a"><div><p>AAproject non utilizza cookie di profilazione, cookie analitici né cookie di terze parti.
+          Non sono presenti strumenti come Google Analytics, pixel di tracciamento, plugin social o script
+          pubblicitari. Per questo motivo il sito non mostra un banner di consenso: non c'è alcun consenso
+          da richiedere.</p></div></div>
+      </div>
+      <div class="legal-item">
+        <button class="legal-q" aria-expanded="false"><span>Font e risorse grafiche</span><i aria-hidden="true"></i></button>
+        <div class="legal-a"><div><p>I caratteri tipografici (Inter e Space Grotesk) sono ospitati direttamente sul server di questo sito,
+          anziché essere caricati da servizi esterni come Google Fonts. Questo evita che il browser stabilisca
+          connessioni con server di terze parti — e quindi che venga trasmesso l'indirizzo IP del visitatore —
+          durante la normale navigazione. Tutte le immagini e le icone del sito sono incorporate direttamente
+          nella pagina.</p></div></div>
+      </div>
+      <div class="legal-item">
+        <button class="legal-q" aria-expanded="false"><span>Cookie tecnici futuri</span><i aria-hidden="true"></i></button>
+        <div class="legal-a"><div><p>Qualora in futuro venissero introdotti cookie tecnici strettamente necessari al funzionamento del
+          sito (ad esempio per ricordare una preferenza), questa pagina sarà aggiornata di conseguenza e, se
+          richiesto dalla normativa, verrà reintrodotto un apposito banner informativo.</p></div></div>
+      </div>
+      <div class="legal-item">
+        <button class="legal-q" aria-expanded="false"><span>Come gestire i cookie dal browser</span><i aria-hidden="true"></i></button>
+        <div class="legal-a"><div><p>Anche in assenza di cookie installati da questo sito, è possibile in qualsiasi momento controllare,
+          bloccare o eliminare i cookie già presenti tramite le impostazioni del proprio browser.</p></div></div>
+      </div>
+    </div>
+    <p class="legal-updated rv">Ultimo aggiornamento: settembre 2026.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="logo">
+          <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 400 224" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="aaFoot" x1="14%" y1="96%" x2="86%" y2="4%"><stop offset="0%" stop-color="#7E848D"/><stop offset="34%" stop-color="#C9CDD3"/><stop offset="62%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#B4BAC2"/></linearGradient></defs><g fill="url(#aaFoot)"><path d="M97 8 L189 214 L145 214 L97 104 L49 214 L5 214 Z"/><path d="M303 8 L395 214 L351 214 L303 104 L255 214 L211 214 Z"/><path d="M8 214 C64 150 138 106 218 97 C296 88 352 148 394 214 L340 214 C300 164 268 134 214 141 C154 149 92 180 54 214 Z"/></g></svg></span>
+          AA<span>project</span>
+        </a>
+        <p>Digital agency specializzata nella creazione di siti web moderni, veloci e su misura
+          per le aziende italiane.</p>
+      </div>
+
+      <div class="foot-col">
+        <h4>Servizi</h4>
+        <ul>
+          <li><a href="#servizi">Siti web aziendali</a></li>
+          <li><a href="#servizi">E-commerce</a></li>
+          <li><a href="#servizi">Landing page</a></li>
+          <li><a href="#servizi">Restyling</a></li>
+          <li><a href="#servizi">SEO</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4>Agenzia</h4>
+        <ul>
+          <li><a href="#metodo">Il nostro metodo</a></li>
+          <li><a href="#confronto">Prima / Dopo</a></li>
+          <li><a href="#valori">Il nostro impegno</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4>Contatti</h4>
+        <ul>
+          <li><a href="mailto:AAdevelopmentproject@gmail.com">AAdevelopmentproject@gmail.com</a></li>
+          <li><a href="#contatti">Contattaci</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bot">
+      <span>© <span id="year">2026</span> AAproject. Tutti i diritti riservati.</span>
+      <span><a href="#privacy">Privacy Policy</a> · <a href="#cookie">Cookie Policy</a></span>
+    </div>
+    <p class="foot-note">Alcuni contenuti di questo sito sono stati realizzati con l'ausilio di strumenti di intelligenza artificiale.</p>
+  </div>
+</footer>
+
+<!-- CTA flottante mobile -->
+<a href="#contatti" class="btn btn-primary btn-lg sticky-cta" id="stickyCta">
+  Contattaci
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+</a>
+
+<!-- Banner cookie rimosso su richiesta.
+     CSS (.cookie-bar) e JS (blocco "consenso cookie" in app.js) sono rimasti in
+     archivio: per riattivarlo basta reinserire qui il markup del banner. -->
+<script>
+/* ============================================================
+   AAproject — interazioni
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $  = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+  /* ---------- anno corrente ---------- */
+  $$('#year').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+
+  /* ---------- navbar: stato scroll ---------- */
+  var nav = $('#nav');
+  var sticky = $('#stickyCta');
+  function onScroll() {
+    var y = window.scrollY;
+    if (nav) nav.classList.toggle('scrolled', y > 24);
+    if (sticky) sticky.classList.toggle('show', y > 700);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* la CTA flottante sparisce quando si arriva al footer */
+  (function () {
+    var foot = document.querySelector('footer');
+    if (!foot || !sticky || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        document.body.classList.toggle('at-footer', en.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' }).observe(foot);
+  })();
+
+  /* ---------- menu mobile ---------- */
+  var burger = $('#burger');
+  function closeMenu() {
+    document.body.classList.remove('nav-open');
+    if (!burger) return;
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Apri il menu');
+  }
+  if (burger) {
+    burger.addEventListener('click', function () {
+      var open = document.body.classList.toggle('nav-open');
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
+    });
+    $$('#mobileMenu a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+  }
+
+  /* ---------- reveal on scroll ----------
+     IntersectionObserver + rete di sicurezza: se per qualsiasi motivo
+     l'observer non scatta (tab in background, browser che lo throttla),
+     un controllo su scroll/resize garantisce che il contenuto sia visibile. */
+  var revealables = $$('.rv');
+  function revealVisible() {
+    var h = window.innerHeight || 800, left = 0;
+    revealables.forEach(function (el) {
+      if (el.classList.contains('in')) return;
+      if (el.getBoundingClientRect().top < h * 0.94) el.classList.add('in');
+      else left++;
+    });
+    if (!left) {
+      window.removeEventListener('scroll', onRevealScroll);
+      window.removeEventListener('resize', onRevealScroll);
+    }
+  }
+  var revealTick = false;
+  function onRevealScroll() {
+    if (revealTick) return;
+    revealTick = true;
+    requestAnimationFrame(function () { revealTick = false; revealVisible(); });
+  }
+
+  if (reduced || !('IntersectionObserver' in window)) {
+    revealables.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        var group = el.parentElement ? $$('.rv', el.parentElement) : [el];
+        var i = Math.max(0, group.indexOf(el));
+        el.style.transitionDelay = Math.min(i, 6) * 70 + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealables.forEach(function (el) { io.observe(el); });
+
+    window.addEventListener('scroll', onRevealScroll, { passive: true });
+    window.addEventListener('resize', onRevealScroll);
+    setTimeout(revealVisible, 900);
+  }
+
+  /* ---------- effetto luce sulle card ---------- */
+  $$('.card').forEach(function (card) {
+    card.addEventListener('pointermove', function (e) {
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  /* ---------- contatori animati ---------- */
+  function animateCount(el) {
+    var target = parseFloat(el.dataset.count) || 0;
+    var suffix = el.dataset.suffix || '';
+    var prefix = el.dataset.prefix || '';
+    if (reduced) { el.textContent = prefix + target + suffix; return; }
+    var dur = 1300, t0 = null;
+    function tick(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  var counters = $$('[data-count]');
+  if ('IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        animateCount(en.target);
+        cio.unobserve(en.target);
+      });
+    }, { threshold: 0.55 });
+    counters.forEach(function (el) { cio.observe(el); });
+  } else {
+    counters.forEach(animateCount);
+  }
+
+  /* ---------- anello performance dell'hero ---------- */
+  (function () {
+    var ring = $('#scoreRing'), num = $('#scoreNum');
+    if (!ring) return;
+    var target = 98, circ = 151;
+    function run() {
+      ring.style.strokeDashoffset = String(circ - (circ * target) / 100);
+      if (reduced) { num.textContent = target; return; }
+      var dur = 1600, t0 = null;
+      function tick(t) {
+        if (t0 === null) t0 = t;
+        var p = Math.min(1, (t - t0) / dur);
+        num.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    setTimeout(run, 450);
+  })();
+
+  /* ---------- marquee: duplica il contenuto per il loop ---------- */
+  (function () {
+    var track = $('#marquee');
+    if (!track) return;
+    track.innerHTML += track.innerHTML;
+  })();
+
+  /* ---------- confronto prima / dopo ---------- */
+  (function () {
+    var box = $('#compare');
+    if (!box) return;
+    var after = $('#cmpAfter'), handle = $('#cmpHandle');
+    var pos = 50, dragging = false;
+
+    function set(p) {
+      pos = Math.max(0, Math.min(100, p));
+      after.style.setProperty('--pos', pos + '%');
+      handle.style.left = pos + '%';
+      box.setAttribute('aria-valuenow', String(Math.round(pos)));
+    }
+    function fromEvent(e) {
+      var r = box.getBoundingClientRect();
+      set(((e.clientX - r.left) / r.width) * 100);
+    }
+
+    box.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      box.setPointerCapture(e.pointerId);
+      fromEvent(e);
+    });
+    box.addEventListener('pointermove', function (e) {
+      if (dragging) { e.preventDefault(); fromEvent(e); }
+    });
+    ['pointerup', 'pointercancel'].forEach(function (t) {
+      box.addEventListener(t, function () { dragging = false; });
+    });
+    box.addEventListener('keydown', function (e) {
+      var step = e.shiftKey ? 10 : 4;
+      if (e.key === 'ArrowLeft')  { set(pos - step); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { set(pos + step); e.preventDefault(); }
+      if (e.key === 'Home')       { set(0);  e.preventDefault(); }
+      if (e.key === 'End')        { set(100); e.preventDefault(); }
+    });
+
+    set(50);
+
+    /* piccola animazione di richiamo al primo ingresso nel viewport */
+    if (!reduced && 'IntersectionObserver' in window) {
+      var teased = false;
+      var tio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting || teased) return;
+          teased = true;
+          var t0 = null;
+          function tick(t) {
+            if (t0 === null) t0 = t;
+            var p = Math.min(1, (t - t0) / 1700);
+            var e2 = 1 - Math.pow(1 - p, 3);
+            if (!dragging) set(50 + Math.sin(e2 * Math.PI * 2) * 17);
+            if (p < 1) requestAnimationFrame(tick); else if (!dragging) set(50);
+          }
+          requestAnimationFrame(tick);
+          tio.disconnect();
+        });
+      }, { threshold: 0.45 });
+      tio.observe(box);
+    }
+  })();
+
+  /* ---------- FAQ ---------- */
+  $$('.faq-item').forEach(function (item) {
+    var btn = $('.faq-q', item), panel = $('.faq-a', item);
+    btn.addEventListener('click', function () {
+      var open = item.classList.contains('open');
+
+      $$('.faq-item.open').forEach(function (other) {
+        if (other === item) return;
+        other.classList.remove('open');
+        $('.faq-q', other).setAttribute('aria-expanded', 'false');
+        $('.faq-a', other).style.height = '0px';
+      });
+
+      item.classList.toggle('open', !open);
+      btn.setAttribute('aria-expanded', String(!open));
+      panel.style.height = open ? '0px' : panel.firstElementChild.offsetHeight + 'px';
+    });
+  });
+  window.addEventListener('resize', function () {
+    $$('.faq-item.open').forEach(function (item) {
+      var panel = $('.faq-a', item);
+      panel.style.height = panel.firstElementChild.offsetHeight + 'px';
+    });
+  });
+
+  /* ---------- sportelli privacy / cookie (uno per lista, chiusi di default) ---------- */
+  $$('.legal-list').forEach(function (list) {
+    $$('.legal-item', list).forEach(function (item) {
+      var btn = $('.legal-q', item), panel = $('.legal-a', item);
+      btn.addEventListener('click', function () {
+        var open = item.classList.contains('open');
+
+        $$('.legal-item.open', list).forEach(function (other) {
+          if (other === item) return;
+          other.classList.remove('open');
+          $('.legal-q', other).setAttribute('aria-expanded', 'false');
+          $('.legal-a', other).style.height = '0px';
+        });
+
+        item.classList.toggle('open', !open);
+        btn.setAttribute('aria-expanded', String(!open));
+        panel.style.height = open ? '0px' : panel.firstElementChild.offsetHeight + 'px';
+      });
+    });
+  });
+  window.addEventListener('resize', function () {
+    $$('.legal-item.open').forEach(function (item) {
+      var panel = $('.legal-a', item);
+      panel.style.height = panel.firstElementChild.offsetHeight + 'px';
+    });
+  });
+
+  /* ---------- form contatti ---------- */
+  (function () {
+    var form = $('#form');
+    if (!form) return;
+    var ok = $('#formOk'), okTxt = $('#formOkTxt');
+
+    function fieldOf(input) { return input.closest('.field'); }
+    function clearErr(input) { fieldOf(input).classList.remove('err'); }
+
+    $$('input, select, textarea', form).forEach(function (input) {
+      input.addEventListener('input', function () { clearErr(input); });
+      input.addEventListener('change', function () { clearErr(input); });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nome = $('#f-nome'), email = $('#f-email'), tipo = $('#f-tipo'), privacy = $('#f-privacy');
+      var bad = null;
+
+      [nome, email, tipo, privacy].forEach(function (i) { clearErr(i); });
+
+      if (!nome.value.trim()) { fieldOf(nome).classList.add('err'); bad = bad || nome; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) {
+        fieldOf(email).classList.add('err'); bad = bad || email;
+      }
+      if (!tipo.value) { fieldOf(tipo).classList.add('err'); bad = bad || tipo; }
+      if (!privacy.checked) { fieldOf(privacy).classList.add('err'); bad = bad || privacy; }
+
+      if (bad) { bad.focus(); ok.classList.remove('show'); return; }
+
+      /* Nessun backend: prepariamo una email precompilata.
+         Sostituire con l'endpoint reale (es. Formspree / API) quando disponibile. */
+      var d = new FormData(form);
+      var body = [
+        'Nome: '     + (d.get('nome')     || '-'),
+        'Azienda: '  + (d.get('azienda')  || '-'),
+        'Email: '    + (d.get('email')    || '-'),
+        'Telefono: ' + (d.get('telefono') || '-'),
+        'Sito: '     + (d.get('sito')     || '-'),
+        'Progetto: ' + (d.get('tipo')     || '-'),
+        '',
+        (d.get('messaggio') || '')
+      ].join('\n');
+
+      var href = 'mailto:AAdevelopmentproject@gmail.com'
+        + '?subject=' + encodeURIComponent('Richiesta di contatto — ' + (d.get('azienda') || d.get('nome')))
+        + '&body=' + encodeURIComponent(body);
+
+      okTxt.textContent = 'Perfetto! Abbiamo aperto il tuo client di posta con la richiesta già compilata: '
+        + 'ti basta premere invio. Se non si apre, scrivici a AAdevelopmentproject@gmail.com.';
+      ok.classList.add('show');
+      ok.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      window.location.href = href;
+    });
+  })();
+
+  /* ---------- consenso cookie ----------
+     Il sito non installa cookie di profilazione: memorizziamo solo la scelta
+     dell'utente in localStorage. Gli script di analisi (se aggiunti in futuro)
+     vanno caricati dentro enableAnalytics(). */
+  (function () {
+    var KEY = 'aa_cookie_consent';
+    var bar = $('#cookieBar');
+    if (!bar) return;
+
+    function read() {
+      try { return localStorage.getItem(KEY); } catch (e) { return null; }
+    }
+    function write(v) {
+      try { localStorage.setItem(KEY, v); } catch (e) {}
+    }
+    function show() {
+      bar.removeAttribute('hidden');
+      bar.classList.add('show');
+      document.body.classList.add('cookie-open');
+    }
+    function hide() {
+      bar.classList.remove('show');
+      document.body.classList.remove('cookie-open');
+      setTimeout(function () { bar.setAttribute('hidden', ''); }, 450);
+    }
+
+    function enableAnalytics() {
+      /* Punto di aggancio per Google Analytics o strumenti equivalenti.
+         Finché resta vuoto, il sito non scrive alcun cookie analitico. */
+    }
+
+    var saved = read();
+    if (saved === 'all') enableAnalytics();
+    if (!saved) setTimeout(show, 900);
+
+    var acc = $('#cookieAccept'), rej = $('#cookieReject');
+    if (acc) acc.addEventListener('click', function () {
+      write('all'); enableAnalytics(); hide();
+    });
+    if (rej) rej.addEventListener('click', function () {
+      write('necessary'); hide();
+    });
+
+    $$('#cookiePrefs').forEach(function (btn) {
+      btn.addEventListener('click', function (e) { e.preventDefault(); show(); });
+    });
+  })();
+
+  /* ---------- smooth scroll con offset per la navbar ---------- */
+  $$('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      if (id === '#' || id.length < 2) return;
+      var el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      var top = el.getBoundingClientRect().top + window.scrollY - 70;
+      window.scrollTo({ top: top, behavior: reduced ? 'auto' : 'smooth' });
+      history.replaceState(null, '', id);
+    });
+  });
+})();
+
+</script>
+</body>
+</html>
